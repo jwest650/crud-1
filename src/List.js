@@ -23,7 +23,7 @@ const List = (props) => {
                             <td className="border text-center py-4">
                                 {a.name}
                             </td>
-                            <td className="border text-center py-4">
+                            <td className="border text-center py-4 text-red-900">
                                 {a.email}
                             </td>
                             <td className="border text-center py-4">{a.gen}</td>
