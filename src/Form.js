@@ -1,71 +1,60 @@
 import React, { useState } from "react";
-
-const Form = ({ set }) => {
+import form from "./form.module.css";
+import { v4 as uuid } from "uuid";
+const Form = ({ add }) => {
     const [name, setname] = useState("");
     const [email, setemail] = useState("");
     const [gen, setgen] = useState("");
-
-    function userUpdater(e) {
-        e.preventDefault();
-
-        const users = { name: name, email: email, gen: gen };
-        set((prev) => [...prev, users]);
-        setname("");
-        setemail("");
-        setgen("");
+    function adduser() {
+        const newUser = { name: name, email: email, gen: gen, id: uuid() };
+        add((prev) => [...prev, newUser]);
     }
-
     return (
-        <div className="pt-[20px] ">
-            <section className=" mx-auto   w-[30%] h-[17rem] rounded bg-white">
-                <h1 className="text-center text-[25px] font-bold capitalize">
-                    Enter users
-                </h1>
-
-                <form
-                    action=""
-                    onSubmit={userUpdater}
-                    className="space-y-[18px] px-[30px] pt-[20px]"
-                >
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="Enter your Name"
-                            className=" w-full p-1 px-3 outline-none border rounded"
-                            value={name}
-                            onChange={(e) => {
-                                setname(e.target.value);
-                            }}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="Enter your E-mail"
-                            className=" w-full p-1 px-3 outline-none border rounded"
-                            value={email}
-                            onChange={(e) => {
-                                setemail(e.target.value);
-                            }}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="text"
-                            placeholder="Your Gen"
-                            className=" w-full p-1 px-3 outline-none border rounded"
-                            value={gen}
-                            onChange={(e) => {
-                                setgen(e.target.value);
-                            }}
-                        />
-                    </div>
-
-                    <button className="bg-[#257bf6] text-white py-1  w-full rounded">
-                        Add user
-                    </button>
-                </form>
+        <div className="bg-white w-25 p-4 mx-auto ">
+            <h6 className={form.h6}>Add your details</h6>
+            <small>
+                For more info? <a href="">click here</a>
+            </small>
+            <section className={form.section}>
+                <label htmlFor="" className={form.label}>
+                    Name
+                </label>
+                <input
+                    placeholder="Your Name"
+                    type="text"
+                    className={form.input}
+                    value={name}
+                    onChange={(e) => setname(e.target.value)}
+                />
             </section>
+            <section className={form.section}>
+                <label htmlFor="" className={form.label}>
+                    Email
+                </label>
+                <input
+                    placeholder="Your Email"
+                    type="text"
+                    className={form.input}
+                    value={email}
+                    onChange={(e) => setemail(e.target.value)}
+                />
+            </section>
+            <section className={form.section}>
+                <label htmlFor="" className={form.label}>
+                    Gen
+                </label>
+                <input
+                    placeholder="Your Gen"
+                    type="text"
+                    className={form.input}
+                    value={gen}
+                    onChange={(e) => setgen(e.target.value)}
+                />
+            </section>
+
+            <button className={form.btn} onClick={adduser}>
+                Add Me
+            </button>
         </div>
     );
 };

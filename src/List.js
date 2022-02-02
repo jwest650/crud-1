@@ -1,36 +1,111 @@
-import React from "react";
+import React, { useState } from "react";
+import { Modal, Button } from "react-bootstrap";
+const List = ({ users, deleteUser, edit }) => {
+    const [show, setshow] = useState(false);
+    const [name, setname] = useState("");
+    const [email, setemail] = useState("");
+    const [id, setid] = useState("");
+    const [gen, setgen] = useState("");
+    function edituser(user) {
+        setshow(true);
+        setname(user.name);
+        setemail(user.email);
+        setid(user.id);
+        setgen(user.gen);
+    }
+    function handlechange() {
+        const newUser = {
+            name,
+            email,
+            id,
+            gen,
+        };
 
-const List = (props) => {
+        edit(id, newUser);
+
+        setshow(false);
+    }
+    console.log(name, email);
     return (
-        <div className="h-[300px] w-[50%] overflow-y-auto mx-auto mt-10 ">
-            <table className="table-auto shadow-lg bg-white w-full ">
-                <thead>
-                    <tr className="capitalize">
-                        <th className="bg-blue-100 border text-center px-8 py-4">
-                            name
-                        </th>
-                        <th className="bg-blue-100 border text-center px-8 py-4">
-                            email
-                        </th>
-                        <th className="bg-blue-100 border text-center px-8 py-4">
-                            gen
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {props.users.map((a, i) => (
-                        <tr className="capitalize">
-                            <td className="border text-center py-4">
-                                {a.name}
-                            </td>
-                            <td className="border text-center py-4 text-red-900">
-                                {a.email}
-                            </td>
-                            <td className="border text-center py-4">{a.gen}</td>
+        <div className=" mx-auto content">
+            {users.length > 0 ? (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Gen</th>
+                            <th>Actions</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+
+                    {users.map((user) => {
+                        return (
+                            <tbody>
+                                <tr>
+                                    <td>{user.name}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.gen}</td>
+                                    <td>
+                                        <button
+                                            className="btn"
+                                            onClick={() => edituser(user)}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            className="btn"
+                                            onClick={() => deleteUser(user.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                                <Modal
+                                    show={show}
+                                    onHide={() => setshow(false)}
+                                >
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>Edit User</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <input
+                                            type="text"
+                                            value={name}
+                                            onChange={(e) =>
+                                                setname(e.target.value)
+                                            }
+                                        />
+                                        <input
+                                            type="text"
+                                            value={email}
+                                            onChange={(e) =>
+                                                setemail(e.target.value)
+                                            }
+                                        />
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button
+                                            variant="secondary"
+                                            onClick={() => setshow(false)}
+                                        >
+                                            Close
+                                        </Button>
+                                        <Button
+                                            variant="primary"
+                                            onClick={handlechange}
+                                        >
+                                            Save Changes
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>{" "}
+                            </tbody>
+                        );
+                    })}
+                </table>
+            ) : (
+                <h3 className="">No users available</h3>
+            )}
         </div>
     );
 };

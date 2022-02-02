@@ -1,0 +1,39 @@
+.form {
+    height: 25em;
+}
+.label {
+    font-size: 13px;
+    padding-bottom: 6px;
+}
+
+.input {
+    border: none;
+    font-size: 13px;
+    margin-top: -5px !important;
+    background: transparent;
+    height: 17px;
+    display: block;
+    padding: 10px 0;
+    outline: none;
+}
+.section {
+    margin: 10px 0;
+    padding: 0 5px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.btn {
+    border-radius: 5px;
+    color: white;
+    padding: 7px 0;
+    width: 100%;
+    border: none;
+    background-color: #635eee;
+}
+.h6 {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 0.5px;
+}
