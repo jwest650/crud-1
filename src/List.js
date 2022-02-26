@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-const List = ({ users, deleteUser, edit }) => {
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+const List = () => {
+    const users = useSelector((state) => state);
+    console.log(users);
+    const dispatch = useDispatch();
     const [show, setshow] = useState(false);
     const [name, setname] = useState("");
     const [email, setemail] = useState("");
     const [id, setid] = useState("");
     const [gen, setgen] = useState("");
     function edituser(user) {
-        setshow(true);
-        setname(user.name);
         setemail(user.email);
-        setid(user.id);
+        setname(user.name);
         setgen(user.gen);
+        setid(user.id);
+        setshow(true);
     }
     function handlechange() {
         const newUser = {
@@ -20,12 +25,17 @@ const List = ({ users, deleteUser, edit }) => {
             id,
             gen,
         };
-
-        edit(id, newUser);
+        dispatch({
+            type: "EDIT_USER",
+            payload: newUser,
+        });
 
         setshow(false);
     }
-    console.log(name, email);
+
+    function deleteUser(id) {
+        dispatch({ type: "REMOVE_USER", payload: id });
+    }
     return (
         <div className=" mx-auto content">
             {users.length > 0 ? (
@@ -41,7 +51,7 @@ const List = ({ users, deleteUser, edit }) => {
 
                     {users.map((user) => {
                         return (
-                            <tbody>
+                            <tbody key={user.id}>
                                 <tr>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
@@ -98,7 +108,7 @@ const List = ({ users, deleteUser, edit }) => {
                                             Save Changes
                                         </Button>
                                     </Modal.Footer>
-                                </Modal>{" "}
+                                </Modal>
                             </tbody>
                         );
                     })}
