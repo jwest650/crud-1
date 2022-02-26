@@ -114,7 +114,7 @@ const List = () => {
                     })}
                 </table>
             ) : (
-                <h3 className="">No users available</h3>
+                <h3 className="">No users </h3>
             )}
         </div>
     );
