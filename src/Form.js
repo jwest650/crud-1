@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import form from "./form.module.css";
-import { v4 as uuid } from "uuid";
-import { useDispatch } from "react-redux";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { db } from "./firebase/firebase";
 const Form = () => {
     const [name, setname] = useState("");
     const [email, setemail] = useState("");
     const [gen, setgen] = useState("");
-    let dispatch = useDispatch();
-    function adduser(e) {
+    async function adduser(e) {
         e.preventDefault();
-        const newUser = { name: name, email: email, gen: gen, id: uuid() };
-        dispatch({ type: "ADD_USER", payload: newUser });
+        const newUser = { name: name, email: email, gen: gen };
+        await addDoc(collection(db, "userlist"), {
+            ...newUser,
+            created: Timestamp.now(),
+        });
+
+        setname("");
+        setemail("");
+        setgen("");
     }
     return (
         <div className="bg-white w-25 p-4 mx-auto ">

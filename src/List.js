@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { updateDoc, doc, deleteDoc } from "firebase/firestore";
+import { db } from "./firebase/firebase";
 const List = () => {
     const users = useSelector((state) => state);
     console.log(users);
@@ -18,23 +20,21 @@ const List = () => {
         setid(user.id);
         setshow(true);
     }
-    function handlechange() {
+    async function handlechange() {
         const newUser = {
             name,
             email,
             id,
             gen,
         };
-        dispatch({
-            type: "EDIT_USER",
-            payload: newUser,
+        await updateDoc(doc(db, "userlist", id), {
+            ...newUser,
         });
-
         setshow(false);
     }
 
-    function deleteUser(id) {
-        dispatch({ type: "REMOVE_USER", payload: id });
+    async function deleteUser(id) {
+        await deleteDoc(doc(db, "userlist", id));
     }
     return (
         <div className=" mx-auto content">
