@@ -86,9 +86,12 @@ const Signin = ({ change }) => {
             <div>
                 <small>or sign in with</small>
 
-                <span className="google" onClick={google}>
-                    <AiFillGoogleSquare />
-                </span>
+                <button className="google" onClick={google}>
+                    <AiFillGoogleSquare
+                        className="
+                    icon"
+                    />
+                </button>
             </div>
             <div>
                 <a href="#" onClick={() => change(true)}>

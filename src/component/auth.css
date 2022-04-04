@@ -25,6 +25,10 @@
 
 .section h1 {
     margin: 20px;
+    font-weight: bold;
+}
+small {
+    font-weight: bold;
 }
 .section button {
     background-color: rgba(0, 0, 255, 0.342);
@@ -45,13 +49,13 @@
 .section form div {
     margin: 20px;
 }
-.fb {
-    color: blue;
-    font-size: 2em;
-    border-radius: 10px;
-}
 
-.google {
+.section .google {
+    background-color: white;
+    padding: 0;
+}
+.icon {
+    display: inline-block;
+    font-size: 2.3em;
     color: red;
-    font-size: 2em;
 }
