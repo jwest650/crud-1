@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { updateDoc, doc, deleteDoc } from "firebase/firestore";
 import { db } from "./firebase/firebase";
 const List = () => {
-    const users = useSelector((state) => state);
+    const users = useSelector((state) => state.user);
     console.log(users);
-    const dispatch = useDispatch();
     const [show, setshow] = useState(false);
     const [name, setname] = useState("");
     const [email, setemail] = useState("");
