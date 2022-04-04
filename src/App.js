@@ -4,8 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import List from "./List";
 import { db } from "./firebase/firebase";
 import { onSnapshot, query, orderBy, collection } from "firebase/firestore";
-import { useDispatch } from "react-redux";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
 import Authenticate from "./component/authenticate";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Protectedroute from "./component/Protectedroute";
@@ -19,7 +19,6 @@ const App = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 dispatch({ type: "login", payload: user });
-                console.log("signed in");
             } else {
                 console.log("user signed outs");
             }
@@ -43,13 +42,11 @@ const App = () => {
                         element={
                             <Protectedroute>
                                 <Dashboard />
-
                                 <Form />
                                 <List />
                             </Protectedroute>
                         }
                     />
-
                     <Route path="/login" element={<Authenticate />} />
                 </Routes>
             </BrowserRouter>
