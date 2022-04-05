@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { IoLogoFacebook } from "react-icons/io";
 import { AiFillGoogleSquare } from "react-icons/ai";
 import {
     getAuth,
@@ -69,7 +68,7 @@ const Signin = ({ change }) => {
             </div>
             <div>
                 <input
-                    type="text"
+                    type="password"
                     name="password"
                     placeholder="Password"
                     value={userInfo.password}

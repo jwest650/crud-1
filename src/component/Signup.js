@@ -44,7 +44,7 @@ const Signup = ({ change }) => {
             </div>
             <div>
                 <input
-                    type="text"
+                    type="password"
                     name="password"
                     placeholder="Password"
                     value={userInfo.password}
